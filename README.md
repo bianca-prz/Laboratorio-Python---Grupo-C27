@@ -1,4 +1,4 @@
-# Laboratorio-Python---Grupo-C27
+# 𝑳𝒂𝒃𝒐𝒓𝒂𝒕𝒐𝒓𝒊𝒐 𝑷𝒚𝒕𝒉𝒐𝒏 - 𝑮𝒓𝒖𝒑𝒐 𝑪𝟐𝟕
 ## 👥 Integrantes
 * **Araujo Ledezma, Pilar** - Legajo: 31527
 * **Perez, Bianca Belen** - Legajo: 31883
