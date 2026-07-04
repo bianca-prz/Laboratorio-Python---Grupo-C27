@@ -16,7 +16,7 @@
 * **Comisión:** C
 * **Año:** 2026
   
-## Descripción General
+## 📑 Descripción General
 Este proyecto contará en un sistema desarrollado en Python que permite administrar la inscripción
 de estudiantes a cursos o talleres. 
 
