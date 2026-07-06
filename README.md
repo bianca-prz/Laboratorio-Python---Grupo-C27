@@ -31,4 +31,4 @@ de estudiantes a cursos o talleres.
 El sistema utiliza estructuras condicionales, estructuras repetitivas, funciones, validaciones de datos, manejo de errores, y
 acumuladores/contadores para calcular las estadísticas.
 
-##🗂
+## 🗂 Metodología de trabajo y Uso de Inteligencia Artificial 
