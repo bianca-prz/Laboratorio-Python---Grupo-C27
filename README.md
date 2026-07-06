@@ -45,7 +45,7 @@ Acción SistemadeInscripciones es
         Cupo: caracter
         
         Escribir ("LISTA DE CURSOS DISPONIBLES")
-                ABRIR(cursos.txt, leer)
+                ABRIR E/(cursos.txt)
         
         MIENTRAS NFDA (cursos.txt) HACER
             // Leemos el nombre del curso
@@ -72,7 +72,7 @@ Acción SistemadeInscripciones es
       obtener_cupo_maximo := 0
       Encontrado := Falso 
     
-      ABRIR(cursos.txt, leer)
+      ABRIR E/(cursos.txt)
     
       Mientras NFDA (cursos.txt) Y (Encontrado = Falso) hacer
         LEER(cursos.txt, curso_actual)
@@ -92,7 +92,7 @@ PROCEDIMIENTO 3: REGISTRAR ALUMNO
     
     PROCEDIMIENTO registrar_inscripcion(alumno : caracter, curso : caracter)
         // Abrimos el archivo 
-               ABRIR(inscripciones.txt) 
+               ABRIR E/(inscripciones.txt) 
         
         // Guardamos los datos
         Escribir(inscripciones.txt, alumno)
@@ -116,7 +116,7 @@ PROCEDIMIENTO 4: ESTADÍSTICAS POR CARRERA
       ESCRIBIR ("ESTADÍSTICAS DE INSCRITOS POR CARRERA")
     
     // 1. Abrimos el archivo de cursos para saber qué carreras existen
-    ABRIR(cursos.txt, LEER)
+    ABRIR E/(cursos.txt)
     
      MIENTRAS NO NFDA (cursos.txt) HACER
         LEER(cursos.txt, curso_catalogo)
