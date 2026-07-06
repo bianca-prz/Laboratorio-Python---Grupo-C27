@@ -178,9 +178,10 @@ PROCESO PRINCIPAL
         mostrar_estadisticas()
     FIN_ACCION
 
+### _Prompt enviado a la IA (Claude):_
 
-
-
-
+<p align="center">
+<img width="1366" height="639" alt="image" src="https://github.com/user-attachments/assets/d3bd2dc0-6461-4706-ba4f-946fbe29ee0c" />
+</p>
 
 
