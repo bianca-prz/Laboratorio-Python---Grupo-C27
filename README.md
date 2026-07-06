@@ -32,3 +32,13 @@ El sistema utiliza estructuras condicionales, estructuras repetitivas, funciones
 acumuladores/contadores para calcular las estadísticas.
 
 ## 🗂 Metodología de trabajo y Uso de Inteligencia Artificial 
+Para la organización y desarrollo de este taller, adoptamos un método de trabajo donde dividimos las tareas para optimizar los tiempos disponible antes de la fecha límite de entrega del proyecto, permitiendonos equilibrar la carga horaria y la complejidad del taller con el resto de nuestras responsabilidades académicas y personales.
+ En primera instancia, optamos por diseñar una estructura básica del código, desarrollando el proceso y las funciones o procedimientos principales del algoritmo, utilizando el Pseudocódigo dictado por la cátedra. Implementamos **Inteligencia Artificial** como herramienta de asistencia para traducir nuestra lógica base al lenguaje Python. Utilizando el material teórico brindado por la cátedra, pudimos verificar la correlación directa y la equivalencia entre las estructuras de control en pseudocódigo y su sintaxis correspondiente en Python. Y, por último, mediante el diseño de prompts específicos y detallados, solicitamos a la IA la detección de posibles errores de lógica, y la propuesta de optimización y ámpliación del código.
+
+
+
+
+
+
+
+
