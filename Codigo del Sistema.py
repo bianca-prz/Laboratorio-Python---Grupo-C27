@@ -138,20 +138,32 @@ def iniciar_programa():
 
     while True:
         mostrar_cursos()
-
-        nombre_alumno = input("\nIngrese Nombre y Apellido del alumno (o 'salir' para terminar): ").strip()
-        if nombre_alumno.lower() == "salir":
+        #cambio: bloque de validacion para que el nombre del alumno no sea vacío y no se pueda inscribir un alumno sin nombre.
+        nombre_alumno = " "
+        while not nombre_alumno:
+          nombre_alumno = input("\nIngrese Nombre y Apellido del alumno (o 'salir' para terminar): ").strip()
+          if nombre_alumno.lower() == "salir":
             break
+          if nombre_alumno.lower() == "salir":
+            break
+# cambio: Bucle de validación: Impide que el curso ingresado sea un texto en blanco
+        curso_elegido = ""
+        while not curso_elegido:
+            curso_elegido = input("Ingrese el nombre del curso de manera exacta: ").strip()
 
-        curso_elegido = input("Ingrese el nombre del curso de manera exacta: ").strip()
+        # Cambio: Validación de Duplicados : Aplica la nueva regla de negocio antes de evaluar cupos
+        if alumno_ya_inscripto(nombre_alumno, curso_elegido):
+            print("Error: Este estudiante ya se encuentra inscripto en este curso.")
+            continue
 
         cupo_maximo = obtener_cupo_maximo(curso_elegido)
 
         if cupo_maximo == 0:
-            # El curso no existe en cursos.txt
+            
             print("El curso ingresado no existe.")
         else:
-            inscriptos_actuales = contar_inscriptos(curso_elegido)
+            # Cambio: El conteo ahora usa la clave normalizada en minúsculas del Counter optimizado
+            inscriptos_actuales = obtener_todas_las_inscripciones()[curso_elegido.casefold()]
             cupo_real_disponible = cupo_maximo - inscriptos_actuales
 
             if cupo_real_disponible > 0:
@@ -164,4 +176,4 @@ def iniciar_programa():
 
 if __name__ == "__main__":
     iniciar_programa()
-
+     
