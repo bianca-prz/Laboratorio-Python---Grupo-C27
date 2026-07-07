@@ -2,7 +2,7 @@
 Sistema de Gestión de Inscripciones - Academia
 Traducción a Python del pseudocódigo original.
 """
-
+from collection import Counter # cambio: se importó counter para leer el archivo de inscripciones de una sola vez (optimización) 
 import os
 
 ARCHIVO_CURSOS = "cursos.txt"
@@ -24,39 +24,37 @@ def inicializar_cursos():
     """Crea cursos.txt con los 6 cursos y cupo=10 SOLO si el archivo no existe aun.
     (El pseudocodigo original nunca creaba este archivo, asumia que ya existia)."""
     if not os.path.exists(ARCHIVO_CURSOS):
+        try: #cambio: se agrega un try para manejar errores de escritura en el archivo 
         with open(ARCHIVO_CURSOS, "w", encoding="utf-8") as archivo:
             for curso in CURSOS_INICIALES:
                 archivo.write(curso + "\n")
                 archivo.write(str(CUPO_INICIAL) + "\n")
-
+        except PermissionError: #cambio: se agrega un except para manejar errores de permisos de escritura en el archivo 
+        print("Error de permisos al crear el catálogo de cursos. Asegurese de tener permisos de escritura en el directorio.")
 
 def mostrar_cursos():
     """PROCEDIMIENTO 1: Muestra la lista de cursos disponibles con su cupo maximo."""
     print("\nLISTA DE CURSOS DISPONIBLES")
-    with open(ARCHIVO_CURSOS, "r", encoding="utf-8") as archivo:
-        lineas = archivo.readlines()  # leemos todas las lineas de una sola vez (reemplaza el bucle MIENTRAS NFDA)
+    lineas = leer_archivo_seguro(ARCHIVO_CURSOS)  # Cambio: Usa lectura segura -> Evita fallos si el archivo no existe o está bloqueado
 
-    # Recorremos de a pares: nombre del curso + cupo, ya que asi se guardan en el archivo
-    for i in range(0, len(lineas), 2):
-        curso = lineas[i].strip()      # .strip() saca el salto de linea "\n"
-        cupo = lineas[i + 1].strip()
-        if curso != "":
-            print(f"- {curso}. Cupos disponibles: {cupo}")
-
+    # cambio: Se usó zip(): Recorre de a pares de forma limpia y moderna sin usar índices manuales i e i+1 (Evita IndexError)
+    for curso, cupo in zip(lineas[0::2], lineas[1::2]):
+        print(f"- {curso}. Cupos disponibles: {cupo}")
+    
 
 def obtener_cupo_maximo(curso_buscado):
     """FUNCION 2: Devuelve el cupo MAXIMO original de un curso (segun cursos.txt).
     Devuelve 0 si el curso no existe en el catalogo."""
-    with open(ARCHIVO_CURSOS, "r", encoding="utf-8") as archivo:
-        lineas = archivo.readlines()
-
-    for i in range(0, len(lineas), 2):
-        curso_actual = lineas[i].strip()
-        cupo_actual_str = lineas[i + 1].strip()
-        if curso_actual == curso_buscado:
-            return int(cupo_actual_str)  # convertimos el texto a numero entero
-
-    return 0  # no se encontro el curso en el catalogo
+    lineas = leer_archivo_seguro(ARCHIVO_CURSOS) # CAMBIO: Se usa la función de lectura segura para evitar errores si el archivo no existe o está bloqueado 
+    # CAMBIO: Se usó zip(): Recorre el catálogo de forma segura emparejando Curso y Cupo
+    for curso_actual, cupo_actual_str in zip(lineas[0::2], lineas[1::2]):
+        # CAMBIO: .casefold(): Compara ignorando mayúsculas/minúsculas ("Programacion" == "programacion")
+        if curso_actual.casefold() == curso_buscado.casefold():
+            try:
+                return int(cupo_actual_str)  # CAMBIO: try/except -> Evita ValueError si el archivo fue editado con texto en vez de número
+            except ValueError:
+                return 0
+    return 0
 
 
 def contar_inscriptos(curso_buscado):
