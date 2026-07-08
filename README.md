@@ -1,9 +1,9 @@
 # 𝑳𝒂𝒃𝒐𝒓𝒂𝒕𝒐𝒓𝒊𝒐 𝑷𝒉𝒚𝒕𝒐𝒏 - 𝑮𝒓𝒖𝒑𝒐 𝑪𝟐𝟕
-## Enlaces
-### Repositorio
+### 🔗 Enlaces
+#### Repositorio
 https://github.com/bianca-prz/Laboratorio-Python---Grupo-C27 
 
-## Video 
+#### Video 
 
 
 ## 👥 Integrantes
