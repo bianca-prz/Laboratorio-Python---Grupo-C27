@@ -206,5 +206,8 @@ PROCESO PRINCIPAL
 De la respuesta a este Prompt, obtenemos nuestro primer commit ("Traducción del código a Python"). Donde se corrigen errores de nuestro código base y se lo pasa a su versión del lenguaje solicitado.
 Es por esto que, si bien este commit contiene todo nuestro desarrollo, debemos aclarar que **dicha estructura en pseudocódigo sí fue desarrollada en un lapso de tiempo más prolongado.**
 
-Luego de esto realizamos ajustes para prevenir errores y cambiamos algunas funciones para lograr una mejora del sistema. Cada uno de estos cambios fue comentado.
+Luego de esto realizamos ajustes para prevenir errores (como `try/except`) y cambiamos algunas funciones para lograr una mejora del sistema. Se agregaron por ejemplo:
+`def obtener_todas_las_inscripciones` , `def obtener_cupo_máximo` , `def alumno_ya_inscripto` , `def validar_nombre` , `def inscribir_estudiante_flujo`. En consecuencia, se modifico el Proceso Principal, dejandolo mucho más limpio y legible, logrando un menu interactivo; quien se encarga de llamar a cada función según la opción elegida por el usuario. 
+  - Cada uno de estos cambios fue comentado.
+
 
