@@ -30,6 +30,7 @@ def leer_archivo_seguro(ruta): #agregamos esta función para leer archivos de ma
         print(f"Error: El archivo {ruta} está abierto en otro programa.")
         return []
     
+
 def inicializar_cursos():
     """Crea cursos.txt con los 6 cursos y cupo=10 SOLO si el archivo no existe aun.
     (El pseudocodigo original nunca creaba este archivo, asumia que ya existia)."""
@@ -124,6 +125,7 @@ def registrar_espera(alumno, curso):
     except PermissionError:
         print("No se pudo registrar la inscripción en espera debido a un error de permisos.")
 
+
 def mostrar_estadisticas():
     """PROCEDIMIENTO 4: Muestra cuantos alumnos estan inscriptos en cada curso."""
     print("\nESTADISTICAS DE INSCRITOS POR CARRERA")
@@ -144,6 +146,54 @@ def validar_nombre(nombre):
     return nombre_limpio.isalpha()
  
 
+def inscribir_estudiante_flujo():
+    """Flujo interactivo paso a paso para inscribir a un estudiante."""
+    print("\n--- REGISTRO DE NUEVO ESTUDIANTE ---")
+    
+    # 1. Validar nombre del alumno
+    while True:
+        nombre_alumno = input("Ingrese Nombre y Apellido del alumno: ").strip()
+        if not nombre_alumno:
+            print("[Error]: El nombre no puede estar vacío.")
+            continue
+        if not validar_nombre(nombre_alumno):
+            print(f"[Error]: El nombre '{nombre_alumno}' es inválido. No debe contener números ni símbolos.")
+            continue
+        break
+
+    # 2. Validar curso elegido
+    lineas_cursos = leer_archivo_seguro(ARCHIVO_CURSOS)
+    cursos_validos = [c.casefold() for c in lineas_cursos[0::2]]
+    
+    while True:
+        curso_elegido = input("Ingrese el nombre del curso de manera exacta: ").strip()
+        if not curso_elegido:
+            print("Error: Debe ingresar un curso.")
+            continue
+        if curso_elegido.casefold() not in cursos_validos:
+            print("Error: El curso ingresado no existe en nuestra oferta académica.")
+            continue
+        
+        # Encontrar el nombre del curso con su mayúscula/minúscula correcta del archivo original
+        for c in lineas_cursos[0::2]:
+            if c.casefold() == curso_elegido.casefold():
+                curso_elegido = c
+                break
+        break
+
+    # 3. Procesar inscripción o duplicado
+    if alumno_ya_inscripto(nombre_alumno, curso_elegido):
+        print(f"\n[Error]: El estudiante '{nombre_alumno}' ya está registrado en '{curso_elegido}'.")
+        return
+
+    cupo_maximo = obtener_cupo_maximo(curso_elegido)
+    inscriptos_actuales = obtener_todas_las_inscripciones()[curso_elegido.casefold()]
+    
+    if cupo_maximo - inscriptos_actuales > 0:
+        registrar_inscripcion(nombre_alumno, curso_elegido)
+    else:
+        registrar_espera(nombre_alumno, curso_elegido)
+
 def iniciar_programa():
     """PROCESO PRINCIPAL: controla el flujo. Se agrego un bucle WHILE para poder
     inscribir a VARIOS alumnos (el pseudocodigo original solo permitia uno y terminaba)."""
@@ -152,41 +202,25 @@ def iniciar_programa():
     print("BIENVENIDOS")
 
     while True:
-        mostrar_cursos()
-        #cambio: bloque de validacion para que el nombre del alumno no sea vacío y no se pueda inscribir un alumno sin nombre.
-        nombre_alumno = " "
-        while not nombre_alumno:
-          nombre_alumno = input("\nIngrese Nombre y Apellido del alumno (o 'salir' para terminar): ").strip()
-          if nombre_alumno.lower() == "salir":
+        print("=== SISTEMA DE GESTIÓN ACADÉMICA ===")
+        print("1. Ver cursos disponibles (y sus cupos actuales)")
+        print("2. Registrar nuevo estudiante")
+        print("3. Ver estadísticas generales")
+        print("4. Salir del programa")
+        
+        opcion = input("Seleccione una opción (1-4): ").strip()
+
+        if opcion == "1":
+            mostrar_cursos()
+        elif opcion == "2":
+            inscribir_estudiante_flujo()
+        elif opcion == "3":
+            mostrar_estadisticas()
+        elif opcion == "4" or opcion.lower() == "salir":
+            print("\n¡Gracias por utilizar el sistema! Saliendo...")
             break
-          if nombre_alumno.lower() == "salir":
-            break
-# cambio: Bucle de validación: Impide que el curso ingresado sea un texto en blanco
-        curso_elegido = ""
-        while not curso_elegido:
-            curso_elegido = input("Ingrese el nombre del curso de manera exacta: ").strip()
-
-        # Cambio: Validación de Duplicados : Aplica la nueva regla de negocio antes de evaluar cupos
-        if alumno_ya_inscripto(nombre_alumno, curso_elegido):
-            print("Error: Este estudiante ya se encuentra inscripto en este curso.")
-            continue
-
-        cupo_maximo = obtener_cupo_maximo(curso_elegido)
-
-        if cupo_maximo == 0:
-            
-            print("El curso ingresado no existe.")
         else:
-            # Cambio: El conteo ahora usa la clave normalizada en minúsculas del Counter optimizado
-            inscriptos_actuales = obtener_todas_las_inscripciones()[curso_elegido.casefold()]
-            cupo_real_disponible = cupo_maximo - inscriptos_actuales
-
-            if cupo_real_disponible > 0:
-                registrar_inscripcion(nombre_alumno, curso_elegido)
-            else:
-                registrar_espera(nombre_alumno, curso_elegido)
-
-    mostrar_estadisticas()
+            print("\n[Error]: Opción inválida. Por favor, seleccione un número del 1 al 4.\n")
 
 
 if __name__ == "__main__":
