@@ -16,38 +16,7 @@
 * **Comisión:** C
 * **Año:** 2026
   
-## 📑 Descripción General
-Este proyecto contará en un sistema desarrollado en Python que permite administrar la inscripción
-de estudiantes a cursos o talleres. 
-
-**Funcionalidades principales:**
-- Registro de estudiantes, con validación de DNI y nombre.
-- Inscripción de estudiantes a cursos, con control de cupo máximo.
-- Lista de espera automática cuando un curso no tiene cupo disponible.
-- Visualización de cursos y cupos disponibles en tiempo real.
-- Estadísticas: total de inscriptos, total de estudiantes registrados y curso
-  con mayor demanda.
-
-El sistema utiliza estructuras condicionales, estructuras repetitivas, funciones, validaciones de datos, manejo de errores, y
-acumuladores/contadores para calcular las estadísticas.
-
-## ✅️ Instrucciones de Ejecución
-
-### Requisitos Previos
-* Tener instalado **Python 3.8** o superior en el sistema.
-* Se recomiendan extensiones de python en el editor de código que disponga, permitiendo correr el código y corregirlo con mayor facilidad de ser necesario (como **Code Runner**, **Python** y **Pylance**)
-
-### Pasos para Ejecutar el Programa
-
-1.  **Clonar o Descargar el Proyecto:** Asegurate de tener el archivo principal de código fuente (por ejemplo, `sistema_inscripciones.py`) en una carpeta local de tu computadora.
-2.  **Abrir una Terminal:** Navegá con la consola de comandos (`cmd`, `PowerShell` o terminal de Linux/macOS) hasta el directorio donde guardaste el archivo.
-3.  **Interacción:** El programa creará automáticamente el catálogo inicial (`cursos.txt`) si no existiera previamente, y desplegará el menú interactivo con las opciones de visualización, registro de estudiantes y estadísticas. Para finalizar las operaciones de manera segura, seleccioná la opción `4` o escribí `salir`.
-4. **Pruebas y Reinicio del Sistema:** Para realizar pruebas limpias o restablecer el sistema a su estado inicial de fábrica:
-    - Cierre el programa desde el menú principal (Opción 4).
-    - Borre manualmente los archivos generados en la misma carpeta: `cursos.txt`, `inscripciones.txt` y `espera.txt`.
-    - Vuelva a iniciar el programa. El sistema detectará la ausencia de los archivos y creará automáticamente un catálogo limpio con los cupos iniciales en 10.
-
-## Descripción General del Sistema
+## 📑 Descripción General del Sistema
 Este sistema es una herramienta interactiva por consola diseñada para administrar el proceso de inscripción de estudiantes a diferentes ofertas académicas. El software implementa de manera eficiente las reglas de negocio de una academia utilizando persistencia de datos en archivos planos de texto (`.txt`).
 
 ### Características Principales:
@@ -64,6 +33,22 @@ El sistema gestiona de forma autónoma tres secuencias de almacenamiento:
 1.  **`cursos.txt`**: Catálogo general de la oferta académica. Almacena en líneas alternas el nombre del curso y su cupo máximo original (Inicializado por defecto con 6 cursos y cupo de 10).
 2.  **`inscripciones.txt`**: Registro de alumnos efectivamente confirmados. Guarda pares de líneas de tipo `[Nombre Alumno]` y `[Curso]`.
 3.  **`espera.txt`**: Registro secundario de desborde. Guarda de forma idéntica a las inscripciones a los alumnos que solicitaron un curso cuyo cupo ya estaba completo.
+
+## ✅️ Instrucciones de Ejecución
+
+### Requisitos Previos
+* Tener instalado **Python 3.8** o superior en el sistema.
+* Se recomiendan extensiones de python en el editor de código que disponga, permitiendo correr el código y corregirlo con mayor facilidad de ser necesario (como **Code Runner**, **Python** y **Pylance**)
+
+### Pasos para Ejecutar el Programa
+
+1.  **Clonar o Descargar el Proyecto:** Asegurate de tener el archivo principal de código fuente (por ejemplo, `sistema_inscripciones.py`) en una carpeta local de tu computadora.
+2.  **Abrir una Terminal:** Navegá con la consola de comandos (`cmd`, `PowerShell` o terminal de Linux/macOS) hasta el directorio donde guardaste el archivo.
+3.  **Interacción:** El programa creará automáticamente el catálogo inicial (`cursos.txt`) si no existiera previamente, y desplegará el menú interactivo con las opciones de visualización, registro de estudiantes y estadísticas. Para finalizar las operaciones de manera segura, seleccioná la opción `4` o escribí `salir`.
+4. **Pruebas y Reinicio del Sistema:** Para realizar pruebas limpias o restablecer el sistema a su estado inicial de fábrica:
+    - Cierre el programa desde el menú principal (Opción 4).
+    - Borre manualmente los archivos generados en la misma carpeta: `cursos.txt`, `inscripciones.txt` y `espera.txt`.
+    - Vuelva a iniciar el programa. El sistema detectará la ausencia de los archivos y creará automáticamente un catálogo limpio con los cupos iniciales en 10.
 
 ## 🗂 Metodología de trabajo y Uso de Inteligencia Artificial 
 Para la organización y desarrollo de este taller, adoptamos un método de trabajo donde dividimos las tareas para optimizar los tiempos disponible antes de la fecha límite de entrega del proyecto, permitiendonos equilibrar la carga horaria y la complejidad del taller con el resto de nuestras responsabilidades académicas y personales.
