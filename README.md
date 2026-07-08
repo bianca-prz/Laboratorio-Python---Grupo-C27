@@ -35,7 +35,7 @@ acumuladores/contadores para calcular las estadísticas.
 
 ### Requisitos Previos
 * Tener instalado **Python 3.8** o superior en el sistema.
-* No se requieren librerías de terceros (todas las dependencias forman parte de la biblioteca estándar de Python).
+* Se recomiendan extensiones de python en el editor de código que disponga, permitiendo correr el código y corregirlo con mayor facilidad de ser necesario (como **Code Runner**, **Python** y **Pylance**)
 
 ### Pasos para Ejecutar el Programa
 
