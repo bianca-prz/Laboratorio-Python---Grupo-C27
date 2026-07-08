@@ -42,18 +42,38 @@ def inicializar_cursos():
         except PermissionError: #cambio: se agrega un except para manejar errores de permisos de escritura en el archivo 
             print("Error de permisos al crear el catálogo de cursos. Asegurese de tener permisos de escritura en el directorio.")
 
+#quitamos la función contar_inscriptos y la reemplazamos por las funciones obtener_todas_las_inscripciones y alumno_ya_inscripto, que son más eficientes y limpias. 
+def obtener_todas_las_inscripciones():
+    """NUEVA FUNCIÓN: Usa Counter: Abre inscripciones.txt UNA SOLA VEZ y cuenta todo. Reemplaza el bucle ineficiente O(N)."""
+    lineas = leer_archivo_seguro(ARCHIVO_INSCRIPCIONES)
+    # CAMBIO: Toma las líneas impares (cursos) asociadas a cada inscripción
+    cursos_inscriptos = [lineas[i].casefold() for i in range(1, len(lineas), 2)]
+    return Counter(cursos_inscriptos)  # CAMBIO: Devuelve un diccionario contador eficiente (Ej: {"programacion": 3, "ingles": 1})
+
+
 def mostrar_cursos():
     """PROCEDIMIENTO 1: Muestra la lista de cursos disponibles con su cupo maximo."""
     print("\nLISTA DE CURSOS DISPONIBLES")
     lineas = leer_archivo_seguro(ARCHIVO_CURSOS)  # Cambio: Usa lectura segura -> Evita fallos si el archivo no existe o está bloqueado
 
+    conteo_inscriptos = obtener_todas_las_inscripciones()  # Cambio: Llama a la optimización con Counter: Cero lecturas repetidas de archivo
+
     # cambio: Se usó zip(): Recorre de a pares de forma limpia y moderna sin usar índices manuales i e i+1 (Evita IndexError)
-    for curso, cupo in zip(lineas[0::2], lineas[1::2]):
-        print(f"- {curso}. Cupos disponibles: {cupo}")
+    for curso, cupo_max_str in zip(lineas[0::2], lineas[1::2]):
+        try:
+            cupo_maximo = int(cupo_max_str)
+        except ValueError:
+            cupo_maximo = 0  # Si el archivo fue editado con texto en vez de número, asumimos cupo=0
+     
+     
+# Restamos los inscritos actuales para mostrar el cupo REAL disponible
+        inscritos = conteo_inscriptos[curso.casefold()]
+        cupo_disponible = max(0, cupo_maximo - inscritos)
+
+        print(f"- {curso}. Cupos disponibles: {cupo_disponible}/{cupo_maximo}")
         print("===================================\n") #agregamos una linea de separacion para que se vea mas prolijo
 
     
-
 def obtener_cupo_maximo(curso_buscado):
     """FUNCION 2: Devuelve el cupo MAXIMO original de un curso (segun cursos.txt).
     Devuelve 0 si el curso no existe en el catalogo."""
@@ -67,14 +87,6 @@ def obtener_cupo_maximo(curso_buscado):
             except ValueError:
                 return 0
     return 0
-
-#quitamos la función contar_inscriptos y la reemplazamos por las funciones obtener_todas_las_inscripciones y alumno_ya_inscripto, que son más eficientes y limpias. 
-def obtener_todas_las_inscripciones():
-    """NUEVA FUNCIÓN: Usa Counter: Abre inscripciones.txt UNA SOLA VEZ y cuenta todo. Reemplaza el bucle ineficiente O(N)."""
-    lineas = leer_archivo_seguro(ARCHIVO_INSCRIPCIONES)
-    # CAMBIO: Toma las líneas impares (cursos) asociadas a cada inscripción
-    cursos_inscriptos = [lineas[i].casefold() for i in range(1, len(lineas), 2)]
-    return Counter(cursos_inscriptos)  # CAMBIO: Devuelve un diccionario contador eficiente (Ej: {"programacion": 3, "ingles": 1})
 
 
 def alumno_ya_inscripto(alumno_buscado, curso_buscado):
@@ -95,7 +107,7 @@ def registrar_inscripcion(alumno, curso):
         with open(ARCHIVO_INSCRIPCIONES, "a", encoding="utf-8") as archivo:
           archivo.write(alumno + "\n")
           archivo.write(curso + "\n")
-        print("Estudiante registrado con exito.")
+        print(f"¡Éxito! Estudiante '{alumno}' registrado en '{curso}'.")
     except PermissionError:
         print("No se pudo registrar la inscripción debido a un error de permisos.")
 
@@ -115,14 +127,22 @@ def registrar_espera(alumno, curso):
 def mostrar_estadisticas():
     """PROCEDIMIENTO 4: Muestra cuantos alumnos estan inscriptos en cada curso."""
     print("\nESTADISTICAS DE INSCRITOS POR CARRERA")
-lineas_cursos = leer_archivo_seguro(ARCHIVO_CURSOS)
-conteo_total = obtener_todas_las_inscripciones()  # CAMBIO: Llama a la optimización con Counter: Cero lecturas repetidas de archivo
-#quitamos with 
-for curso_catalogo in lineas_cursos[0::2]:
+    lineas_cursos = leer_archivo_seguro(ARCHIVO_CURSOS)
+    conteo_total = obtener_todas_las_inscripciones()  # CAMBIO: Llama a la optimización con Counter: Cero lecturas repetidas de archivo
+  #quitamos with 
+    for curso_catalogo in lineas_cursos[0::2]:
         # CAMBIO: Busca directamente en el mapa de Counter usando minúsculas -> Rápido y seguro
-        contador_por_curso = conteo_total[curso_catalogo.casefold()]
-        print(f"- {curso_catalogo}: {contador_por_curso} inscriptos.")
+          contador_por_curso = conteo_total[curso_catalogo.casefold()]
+          print(f"- {curso_catalogo}: {contador_por_curso} inscriptos.")
+          print("=============================================\n")
 
+#agregamos la funcion para validar el nombre del alumno, para que no se pueda inscribir un alumno con nombre vacio o con numeros.
+def validar_nombre(nombre):
+    """Retorna True si el nombre contiene solo letras y espacios. Falso si tiene números."""
+    # Reemplazamos espacios para evaluar si el resto son solo letras alphabeticas
+    nombre_limpio = nombre.replace(" ", "")
+    return nombre_limpio.isalpha()
+ 
 
 def iniciar_programa():
     """PROCESO PRINCIPAL: controla el flujo. Se agrego un bucle WHILE para poder
