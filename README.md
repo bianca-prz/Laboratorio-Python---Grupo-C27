@@ -31,6 +31,22 @@ de estudiantes a cursos o talleres.
 El sistema utiliza estructuras condicionales, estructuras repetitivas, funciones, validaciones de datos, manejo de errores, y
 acumuladores/contadores para calcular las estadísticas.
 
+##Instrucciones de Ejecución
+
+### Requisitos Previos
+* Tener instalado **Python 3.8** o superior en el sistema.
+* No se requieren librerías de terceros (todas las dependencias forman parte de la biblioteca estándar de Python).
+
+### Pasos para Ejecutar el Programa
+
+1.  **Clonar o Descargar el Proyecto:** Asegurate de tener el archivo principal de código fuente (por ejemplo, `sistema_inscripciones.py`) en una carpeta local de tu computadora.
+2.  **Abrir una Terminal:** Navegá con la consola de comandos (`cmd`, `PowerShell` o terminal de Linux/macOS) hasta el directorio donde guardaste el archivo.
+3.  **Interacción:** El programa creará automáticamente el catálogo inicial (`cursos.txt`) si no existiera previamente, y desplegará el menú interactivo con las opciones de visualización, registro de estudiantes y estadísticas. Para finalizar las operaciones de manera segura, seleccioná la opción `4` o escribí `salir`.
+4. **Pruebas y Reinicio del Sistema:** Para realizar pruebas limpias o restablecer el sistema a su estado inicial de fábrica:
+  - Cierre el programa desde el menú principal (Opción 4).
+  - Borre manualmente los archivos generados en la misma carpeta: `cursos.txt`, `inscripciones.txt` y `espera.txt`.
+  - Vuelva a iniciar el programa. El sistema detectará la ausencia de los archivos y creará automáticamente un catálogo limpio con los cupos iniciales en 10.
+
 ## 🗂 Metodología de trabajo y Uso de Inteligencia Artificial 
 Para la organización y desarrollo de este taller, adoptamos un método de trabajo donde dividimos las tareas para optimizar los tiempos disponible antes de la fecha límite de entrega del proyecto, permitiendonos equilibrar la carga horaria y la complejidad del taller con el resto de nuestras responsabilidades académicas y personales.
  En primera instancia, optamos por diseñar una estructura básica del código, desarrollando el proceso y las funciones o procedimientos principales del algoritmo, utilizando el Pseudocódigo dictado por la cátedra. Implementamos **Inteligencia Artificial** como herramienta de asistencia para traducir nuestra lógica base al lenguaje Python. Utilizando el material teórico brindado por la cátedra, pudimos verificar la correlación directa y la equivalencia entre las estructuras de control en pseudocódigo y su sintaxis correspondiente en Python. Y, por último, mediante el diseño de prompts específicos y detallados, solicitamos a la IA la detección de posibles errores de lógica, y la propuesta de optimización y ámpliación del código.
