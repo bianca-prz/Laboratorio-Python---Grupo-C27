@@ -4,7 +4,7 @@
 https://github.com/bianca-prz/Laboratorio-Python---Grupo-C27 
 
 #### Video 
-
+https://youtu.be/cVvJ-RBb9kQ
 
 ## 👥 Integrantes
 * **Araujo Ledezma, Pilar** - Legajo: 31527
