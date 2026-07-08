@@ -31,7 +31,7 @@ de estudiantes a cursos o talleres.
 El sistema utiliza estructuras condicionales, estructuras repetitivas, funciones, validaciones de datos, manejo de errores, y
 acumuladores/contadores para calcular las estadísticas.
 
-##Instrucciones de Ejecución
+## ✅️ Instrucciones de Ejecución
 
 ### Requisitos Previos
 * Tener instalado **Python 3.8** o superior en el sistema.
@@ -43,9 +43,9 @@ acumuladores/contadores para calcular las estadísticas.
 2.  **Abrir una Terminal:** Navegá con la consola de comandos (`cmd`, `PowerShell` o terminal de Linux/macOS) hasta el directorio donde guardaste el archivo.
 3.  **Interacción:** El programa creará automáticamente el catálogo inicial (`cursos.txt`) si no existiera previamente, y desplegará el menú interactivo con las opciones de visualización, registro de estudiantes y estadísticas. Para finalizar las operaciones de manera segura, seleccioná la opción `4` o escribí `salir`.
 4. **Pruebas y Reinicio del Sistema:** Para realizar pruebas limpias o restablecer el sistema a su estado inicial de fábrica:
-  - Cierre el programa desde el menú principal (Opción 4).
-  - Borre manualmente los archivos generados en la misma carpeta: `cursos.txt`, `inscripciones.txt` y `espera.txt`.
-  - Vuelva a iniciar el programa. El sistema detectará la ausencia de los archivos y creará automáticamente un catálogo limpio con los cupos iniciales en 10.
+    - Cierre el programa desde el menú principal (Opción 4).
+    - Borre manualmente los archivos generados en la misma carpeta: `cursos.txt`, `inscripciones.txt` y `espera.txt`.
+    - Vuelva a iniciar el programa. El sistema detectará la ausencia de los archivos y creará automáticamente un catálogo limpio con los cupos iniciales en 10.
 
 ## 🗂 Metodología de trabajo y Uso de Inteligencia Artificial 
 Para la organización y desarrollo de este taller, adoptamos un método de trabajo donde dividimos las tareas para optimizar los tiempos disponible antes de la fecha límite de entrega del proyecto, permitiendonos equilibrar la carga horaria y la complejidad del taller con el resto de nuestras responsabilidades académicas y personales.
