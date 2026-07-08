@@ -19,7 +19,7 @@ CURSOS_INICIALES = [
     "Redes y Soporte Tecnico"
 ]
 
-def leer_archivo_seguro(ruta): #agregamos esta función para leer archivos de manera segura y evitar errores si el archivo no existe.
+def leer_archivo_seguro(ruta): # A nuestro código Origial se le agregamos esta función para leer archivos de manera segura y evitar errores si el archivo no existe.
     """Lee un archivo de forma segura devolviendo sus líneas limpias."""
     if not os.path.exists(ruta):
         return []
@@ -35,15 +35,16 @@ def inicializar_cursos():
     """Crea cursos.txt con los 6 cursos y cupo=10 SOLO si el archivo no existe aun.
     (El pseudocodigo original nunca creaba este archivo, asumia que ya existia)."""
     if not os.path.exists(ARCHIVO_CURSOS):
-        try: #cambio: se agrega un try para manejar errores de escritura en el archivo 
+        try: #cambio: a nuestro código original se agrega un try/except  para manejar errores de escritura en el archivo 
             with open(ARCHIVO_CURSOS, "w", encoding="utf-8") as archivo:
               for curso in CURSOS_INICIALES:
                 archivo.write(curso + "\n")
                 archivo.write(str(CUPO_INICIAL) + "\n")
-        except PermissionError: #cambio: se agrega un except para manejar errores de permisos de escritura en el archivo 
+        except PermissionError: 
             print("Error de permisos al crear el catálogo de cursos. Asegurese de tener permisos de escritura en el directorio.")
 
-#quitamos la función contar_inscriptos y la reemplazamos por las funciones obtener_todas_las_inscripciones y alumno_ya_inscripto, que son más eficientes y limpias. 
+#quitamos la función contar_inscriptos de nuestro código base,
+#  y la reemplazamos por las funciones obtener_todas_las_inscripciones y alumno_ya_inscripto, que son más eficientes y limpias. 
 def obtener_todas_las_inscripciones():
     """NUEVA FUNCIÓN: Usa Counter: Abre inscripciones.txt UNA SOLA VEZ y cuenta todo. Reemplaza el bucle ineficiente O(N)."""
     lineas = leer_archivo_seguro(ARCHIVO_INSCRIPCIONES)
@@ -55,7 +56,7 @@ def obtener_todas_las_inscripciones():
 def mostrar_cursos():
     """PROCEDIMIENTO 1: Muestra la lista de cursos disponibles con su cupo maximo."""
     print("\nLISTA DE CURSOS DISPONIBLES")
-    lineas = leer_archivo_seguro(ARCHIVO_CURSOS)  # Cambio: Usa lectura segura -> Evita fallos si el archivo no existe o está bloqueado
+    lineas = leer_archivo_seguro(ARCHIVO_CURSOS)  # Cambio: Usa lectura segura que Evita fallos si el archivo no existe o está bloqueado
 
     conteo_inscriptos = obtener_todas_las_inscripciones()  # Cambio: Llama a la optimización con Counter: Cero lecturas repetidas de archivo
 
@@ -84,7 +85,7 @@ def obtener_cupo_maximo(curso_buscado):
         # CAMBIO: .casefold(): Compara ignorando mayúsculas/minúsculas ("Programacion" == "programacion")
         if curso_actual.casefold() == curso_buscado.casefold():
             try:
-                return int(cupo_actual_str)  # CAMBIO: try/except -> Evita ValueError si el archivo fue editado con texto en vez de número
+                return int(cupo_actual_str)  # cambio: try/except: Evita ValueError si el archivo fue editado con texto en vez de número
             except ValueError:
                 return 0
     return 0
